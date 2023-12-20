@@ -60,4 +60,18 @@ export class UsersService {
     async removeInfo(id: number): Promise<void> {
         await this.usersInfoRepository.delete(id);
     }
+
+    async updateUser(email: string, type: string): Promise<void>{
+        const userPromise = this.usersRepository.findOne({ 
+            where: { email: email },
+            relations: ["info"]
+         });
+         const updatedUserInfo = await (await userPromise).info;
+        updatedUserInfo.statistics[type] += 1;
+
+        const user = await userPromise;
+        user.info = updatedUserInfo;
+
+        await this.usersInfoRepository.save(updatedUserInfo);
+    }
 }

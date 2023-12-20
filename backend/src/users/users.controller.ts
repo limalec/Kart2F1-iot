@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, ParseIntPipe, Post } from "@nestjs/common";
+import { Controller, Delete, Get, Param, ParseIntPipe, Post, Patch } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { User } from "./entity/users.entity";
 
@@ -34,5 +34,11 @@ export class UsersController {
     @Delete(":id")
     remove(@Param('id') id: number): Promise<void> {
         return this.usersService.removeUser(id);
+    }
+
+    @Patch()
+    update(@Req() req: RawBodyRequest<Request>): Promise<void> {
+        const updatedUser = req.body;
+        return this.usersService.updateUser(updatedUser.email, updatedUser.type);
     }
 }

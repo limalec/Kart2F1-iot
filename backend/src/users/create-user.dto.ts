@@ -5,9 +5,6 @@ export class CreateUserDto {
     email: string;
     info: {
       statistics: JSON;
-      tresholds: JSON;
-      topCategories: JSON[];
-      achievements: string[];
       score: number;
     }
   }
