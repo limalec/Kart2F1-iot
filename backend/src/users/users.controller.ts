@@ -36,7 +36,7 @@ export class UsersController {
         return this.usersService.removeUser(id);
     }
 
-    @Patch()
+    @Patch("addStat")
     update(@Req() req: RawBodyRequest<Request>): Promise<void> {
         const updatedUser = req.body;
         return this.usersService.updateUser(updatedUser.email, updatedUser.type);
