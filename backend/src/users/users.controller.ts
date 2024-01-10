@@ -41,4 +41,14 @@ export class UsersController {
         const updatedUser = req.body;
         return this.usersService.updateUser(updatedUser.email, updatedUser.type);
     }
+
+    @Post("alive")
+    alive() : void {
+        this.usersService.alive();
+    }
+
+    @Get("alive")
+    aliveStatus(): boolean {
+        return this.usersService.aliveStatus();
+    }
 }

@@ -52,7 +52,35 @@ export class UsersService {
             relations: ["info"]
          });
     }
-    
+
+    private _isAlive : boolean = false;
+    public get isAlive() : boolean {
+        return this._isAlive;
+    }
+    public set isAlive(v : boolean) {
+        this._isAlive = v;
+    }
+
+    private _timeoutID : ReturnType<typeof setTimeout>;
+    public get timeoutID() : ReturnType<typeof setTimeout> {
+        return this._timeoutID;
+    }
+    public set timeoutID(v : ReturnType<typeof setTimeout>) {
+        this._timeoutID = v;
+    }
+
+    alive() {
+        this.isAlive = true;
+        clearTimeout(this.timeoutID);
+        this.timeoutID = setTimeout(() => {
+            this.isAlive = false;
+        }, 5000);
+    }
+
+    aliveStatus() : boolean {
+        return this.isAlive;
+    }
+
     async removeUser(id: number): Promise<void> {
         await this.usersRepository.delete(id);
     }
