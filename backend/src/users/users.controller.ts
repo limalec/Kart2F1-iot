@@ -21,6 +21,11 @@ export class UsersController {
         return this.usersService.findAllUsersByScore();
     }
 
+    @Get("alive")
+    aliveStatus(): boolean {
+        return this.usersService.aliveStatus();
+    }
+
     @Get(":id")
     findUser(@Param('id', ParseIntPipe) id: number): Promise<User> {
         return this.usersService.findOneUser(id);
@@ -45,10 +50,5 @@ export class UsersController {
     @Post("alive")
     alive() : void {
         this.usersService.alive();
-    }
-
-    @Get("alive")
-    aliveStatus(): boolean {
-        return this.usersService.aliveStatus();
     }
 }
