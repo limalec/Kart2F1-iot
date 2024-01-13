@@ -4,7 +4,10 @@ import type { NestExpressApplication } from '@nestjs/platform-express';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, { rawBody: true });
-  app.enableCors();
+  app.enableCors({
+    origin: '*',
+    methods: ['GET', 'POST'],
+  });
   await app.listen(3000);
 }
 bootstrap();
